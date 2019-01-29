@@ -1,5 +1,8 @@
 require("dotenv").config();
 
+//keys 
+var keys = require('./keys');
+
 // NPM module used to access Spotify API.
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
@@ -10,17 +13,12 @@ var request = require("request");
 // NPM module used to read the random.txt file.
 var fs = require("fs");
 
-// Text file for logs -- "do-what-it-says"
-// var textFile = './random.txt';
-
 // NPM module for axios   
 var axios = require("axios");
 
-//NPM module for moment
+//NPM module for moment 
 var moment = require('moment');
 
-//keys 
-var keys = require('./keys');
 
 
 
