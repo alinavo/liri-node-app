@@ -58,7 +58,7 @@ function addContent() {
     console.log("");
     console.log("Content has been added!");
     console.log("-----------------------------------\n");
-    appendFile("-----------------------------------\n");
+    fs.appendFile("-----------------------------------\n");
 };
 
 
@@ -68,8 +68,8 @@ function concertThis(argument) {
     if (artist == "") {
         artist = "Drake"
     }
-    var bandURL = "https://rest.bandsintown.com/artists/" + var1 + "/events?app_id=codingbootcamp"
-    axios.get(bandURL).then(
+    var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
+    axios.get(queryURL).then(
         function (response) {
             //Venue
             console.log("Venue: " + response.venue.name);
