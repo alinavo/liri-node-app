@@ -54,6 +54,16 @@ function commandSwitch(command, argument) {
     }
 }
 
+//function add contents of command
+//will print "borders" between commands
+function addContent() {
+    console.log("");
+    console.log("Content has been added!");
+    console.log("-----------------------------------\n");
+    appendFile("-----------------------------------\n");
+};
+
+
 //concertThis function
 function concertThis(argument) {
     var artist = argument;
@@ -81,15 +91,15 @@ function spotifyThis(argument) {
         //if song is unidentified, default is "Africa" by Toto
         song = "Africa";
         console.log(song);
-    }
+    } 
     spotify.search({
         type: 'track',
         query: song
     }, function (error, data) {
         if (error) {
-            return console.log('Error occurred: ' + error);
+            return console.log("ERROR: " + error);
         }
-        data =d data.tracks.items[0];
+        data = data.tracks.items[0];
         // console.log(data);
         console.log("Artist(s) Name: ", data.artists[0].name);
         console.log("Track Name: ", data.name);
@@ -107,33 +117,29 @@ function movieThis(argument) {
     if (movieName == "") {
         movieName = "Mr.+Nobody"
     };
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-    request(queryUrl, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            body = JSON.parse(body);
-            var result = JSON.parse(body)[0];
+    var queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+    axios.get(queryURL).then(
+        function (response) {
             //   * Title of the movie.
-            console.log("Title: ", body.Title);
+            console.log("Title: " + response.data.Title);
             //   * Year the movie came out.
-            console.log("Release Year: ", body.Year);
+            console.log("Release Year: ", response.data.Year);
             //   * IMDB Rating of the movie.
-            console.log("IMDb Rating: ", body.imdbRating);
+            console.log("IMDb Rating: ", +response.data.imdbRating);
             //   * Rotten Tomatoes Rating of the movie.
-            if (body.Ratings[2]) {
-                console.log("Rotten Tomatoes Score: ", body.Ratings[2].Value);
-            }
+            console.log("Rotten Tomatoes Score: ", +response.data.Ratings[1].Value);
             //   * Country where the movie was produced.
-            console.log("Country: ", body.Country);
-            //   * Language of the movie.
-            console.log("Language: ", body.Language);
-            //   * Plot of the movie.
-            console.log("Plot: ", body.Plot);
+            console.log("Country: " + response.data.Country);
+             //   * Language of the movie.
+             console.log("Language: " + response.data.Language);
+             //   * Plot of the movie.
+            console.log("Plot: " + response.data.Plot);
             //   * Actors in the movie.
-            console.log("Actors: ", body.Actors);
+            console.log("Actors: " + response.data.Actors);
             addContent();
-        }
-    });
-};
+});
+            
+
 
 
 // Uses fs node package to take the text inside random.txt,
@@ -143,21 +149,15 @@ function doWhatItSays() {
         return;
     } else {
         // Creates array with data and splits
-			var randomArray = data.split(",");
-			// Sets action to first item in array.
-			command = randomArray[0];
-			// Sets optional third argument to second item in array.
-            argument = randomArray[1];
-            commandSwitch(command, argument);      
+        var randomArray = data.split(",");
+        // Sets action to first item in array.
+        command = randomArray[0];
+        console.log(command);
+        // Sets third argument to second item in array.
+        argument = randomArray[1];
+        console.log(argument);
+        commandSwitch(command, argument);
     };
 
-
-//function add contents of command
-//will print "borders" between commands
-function addContent() {
-    console.log("");
-    console.log("Content has been added!");
-    console.log("-----------------------------------\n");
-    appendFile("-----------------------------------\n");
 };
 }
