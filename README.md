@@ -25,7 +25,7 @@ This app was built using [LIRI Github Repo](https://github.com/alinavo/liri-node
   ``` 
   node liri.js spotify-this-song Africa 
   ```
-  ![Song](/https://github.com/alinavo/liri-node-app/blob/master/song.png)
+  ![Song](https://github.com/alinavo/liri-node-app/blob/master/song.png)
   
   
   **Movie Info**
