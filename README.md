@@ -15,21 +15,30 @@ This app was built using [LIRI Github Repo](https://github.com/alinavo/liri-node
   Commands to use in LIRI app
   
   **Concert Info**
-  ``` node liri.js concert-this Ariana Grande ```
-  
-  ![Concert](https://ibb.co/jhxnfqW)
+  ```
+  node liri.js concert-this Ariana Grande 
+  ```
+  ![Concert](https://github.com/alinavo/liri-node-app/blob/master/concert.png)
+
 
   **Song Info**
-  ``` node liri.js spotify-this-song Africa ```
+  ``` 
+  node liri.js spotify-this-song Africa 
+  ```
+  ![Song](/https://github.com/alinavo/liri-node-app/blob/master/song.png)
   
-  ![Song](/Users/alinavo/Desktop/codes/liri-node-app/song.png)
+  
   **Movie Info**
-  ``` node liri.js movie-this Titanic ```
+  ``` 
+  node liri.js movie-this Titanic 
+  ```
+  ![Movie]( https://github.com/alinavo/liri-node-app/blob/master/movie.png)
   
-  ![Movie](  /Users/alinavo/Desktop/codes/liri-node-app/movie.png)
+  
   **Random Info**
-  ``` node liri.js do-what-it-says ```
-  
-![Random]( /Users/alinavo/Desktop/codes/liri-node-app/random.png)
+  ``` 
+  node liri.js do-what-it-says
+  ```
+![Random](https://github.com/alinavo/liri-node-app/blob/master/random.png)
   
   
