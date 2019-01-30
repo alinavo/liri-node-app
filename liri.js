@@ -25,7 +25,7 @@ var moment = require('moment');
 //command from user
 var command = process.argv[2];
 console.log(command);
-var argument = process.argv.slice(3).join("+");
+var argument = process.argv.slice(3).join(" ");
 console.log(argument);
 
 
@@ -58,8 +58,34 @@ function addContent() {
     console.log("");
     console.log("Content has been added!");
     console.log("-----------------------------------\n");
-    fs.appendFile("-----------------------------------\n");
+    fs.appendFile("random.txt", command + search, function (err) {
+        if (err) throw err;
+    });
 };
+
+
+function doWhatItSays() {
+
+	fs.readFile("random.txt", "utf8", function(err, data) {
+		if (err) {
+			logOutput.error(err);
+		} else {
+
+			// Creates array with data.
+			var randomArray = data.split(",");
+
+			// Sets action to first item in array.
+			command = randomArray[0];
+
+			// Sets optional third argument to second item in array.
+			argument = randomArray[1];
+
+			// Calls main controller to do something based on action and argument.
+            commandSwitch(command, argument);
+		}
+	});
+}
+
 
 
 //concertThis function
@@ -68,19 +94,24 @@ function concertThis(argument) {
     if (artist == "") {
         artist = "Drake"
     }
-    var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
-    axios.get(queryURL).then(
-        function (response) {
+    var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+
+           request(queryUrl, function(error, response, body) {
+                // If the request is successful...
+                if (!error && response.statusCode === 200) {
+                  // Parses the body of the site and recovers movie info.
+                  var band = JSON.parse(body);
             //Venue
-            console.log("Venue: " + response.venue.name);
+            console.log("Venue: " + band.venue.name);
             //Location 
-            console.log("Location: " + response.venue.city);
+            console.log("Location: " + band.venue.city);
             //Time MM/DD/YYYY
-            console.log("Date of Event " + moment(response.datetime).format("MM/DD/YYYY"));
+            console.log("Date of Event " + moment(band.datetime).format("MM/DD/YYYY"));
             //confirmed content has been added
             addContent();
-        })
-};
+        }
+	});
+}
 
 //spotifyThis function
 function spotifyThis(argument) {
@@ -139,23 +170,3 @@ function movieThis(argument) {
             
 
 
-
-// Uses fs node package to take the text inside random.txt,
-function doWhatItSays() {
-    if (error) {
-        console.log('ERROR: Reading random.txt -- ' + error);
-        return;
-    } else {
-        // Creates array with data and splits
-        var randomArray = data.split(",");
-        // Sets action to first item in array.
-        command = randomArray[0];
-        console.log(command);
-        // Sets third argument to second item in array.
-        argument = randomArray[1];
-        console.log(argument);
-        commandSwitch(command, argument);
-    };
-
-};
-}
