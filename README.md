@@ -17,7 +17,7 @@ This app was built using [LIRI Github Repo](https://github.com/alinavo/liri-node
   **Concert Info**
   ``` node liri.js concert-this Ariana Grande ```
   
-  ![Concert]( /Users/alinavo/Desktop/codes/liri-node-app/concert.png)
+  ![Concert](https://ibb.co/jhxnfqW)
 
   **Song Info**
   ``` node liri.js spotify-this-song Africa ```
